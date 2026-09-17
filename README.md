@@ -74,3 +74,17 @@ The dice roller tools (`roll`, `roll_history`, `clear_history`) will appear in C
 ## Session Notes
 
 Roll history is in-memory only and resets when the MCP server restarts (i.e., when Claude Desktop is quit or the server is cycled).
+
+## Troubleshooting
+
+**Hammer icon doesn't appear after restart:**
+Check the Claude Desktop logs:
+```bash
+cat ~/Library/Logs/Claude/mcp-server-dice-roller.log
+```
+
+**`ModuleNotFoundError: No module named 'd20'`:**
+Make sure your Claude Desktop config's `command`/`args` match the `uv run --directory` pattern shown above — the server must be launched through `uv run` so it resolves the project's own environment, not your system Python.
+
+**Roll history resets:**
+Expected — history is in-memory and resets when Claude Desktop restarts the server process.
